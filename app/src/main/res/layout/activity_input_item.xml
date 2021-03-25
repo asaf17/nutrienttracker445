@@ -64,7 +64,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="15"
                         android:gravity="center"
-                        android:nextFocusForward="@id/quantityField"/>
+                        android:nextFocusForward="@id/quantityField"
+                        android:textAlignment="textEnd"/>
 
             </LinearLayout>
 
@@ -93,15 +94,16 @@
                         android:singleLine="true"
                         android:inputType="number"
                         android:hint="Enter Quantity"
-                        android:nextFocusForward="@id/unitSpinner"/>
+                        android:nextFocusForward="@id/unitSpinner" />
 
                     <Spinner
                         android:id="@+id/unitSpinner"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="15"
+                        android:layout_weight="60"
                         android:gravity="center"
-                        android:nextFocusForward="@id/caloriesInput"/>
+                        android:nextFocusForward="@id/caloriesInput"
+                        android:textAlignment="textEnd"/>
 
             </LinearLayout>
 

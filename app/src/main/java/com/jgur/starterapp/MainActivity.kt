@@ -23,11 +23,10 @@ import java.util.*
  */
 class MainActivity : AppCompatActivity() {
 
-//    override fun onResume() {
-//        super.onResume()
-//        setContentView(R.layout.activity_main)
-//    }
-
+    override fun onResume() {
+        super.onResume()
+        loadFile()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,11 +34,11 @@ class MainActivity : AppCompatActivity() {
 
 
         //Loads the items that have been inputted to a local file
-        val loadItems: Button = findViewById(R.id.refresh_main)
-        verifyStoragePermissions(this)
-        loadItems.setOnClickListener(View.OnClickListener {
-            loadFile();
-        })
+//        val loadItems: Button = findViewById(R.id.refresh_main)
+//        verifyStoragePermissions(this)
+//        loadItems.setOnClickListener(View.OnClickListener {
+//            loadFile()
+//        })
 
         //Gets current date and displays it
         val date = findViewById<TextView>(R.id.dateText);
@@ -49,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         //Goes to the input item view when the button is clicked
         val addItemButton: Button = findViewById(R.id.addItem)
         addItemButton.setOnClickListener(View.OnClickListener {
-            inputItemsButtonClick();
+            inputItemsButtonClick()
         })
 
         //Goes to the log when the button is clicked

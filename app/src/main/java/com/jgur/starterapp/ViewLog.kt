@@ -20,14 +20,17 @@ import java.util.*
  * Creates the ViewLog view which will show any items logged for the selected date.
  */
 class ViewLog : AppCompatActivity() {
+
+    override fun onResume() {
+        super.onResume()
+        loadFile()
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_log)
-
-        val loadItems: Button = findViewById(R.id.refresh_item_log)
-        loadItems.setOnClickListener(View.OnClickListener {
-            loadFile();
-        })
+        loadFile();
     }
 
     private fun loadFile() {
