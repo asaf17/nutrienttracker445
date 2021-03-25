@@ -21,6 +21,9 @@ import java.util.*
  */
 class ViewLog : AppCompatActivity() {
 
+    /**
+     * Loads the data from the local file each time the view is opened
+     */
     override fun onResume() {
         super.onResume()
         loadFile()
@@ -64,6 +67,10 @@ class ViewLog : AppCompatActivity() {
         return ret
     }
 
+    /**
+     * Parses the data from the local files for the given date
+     * @param fileText - File from local storage containing all item data
+     */
     private fun parseText(fileText: String) {
 
         val sdf = SimpleDateFormat("MM/dd/yyyy")
@@ -74,6 +81,11 @@ class ViewLog : AppCompatActivity() {
         setValues(itemsInputted)
     }
 
+    /**
+     * Displays each item for the given meal for the selected date
+     * @param fileText - Text pared from local storage containing
+     * only information for the given data.
+     */
     private fun setValues(fileText: String) {
         val bfastValue = findViewById<TextView>(R.id.breakfastValues)
         val lunchValue = findViewById<TextView>(R.id.lunchValues)
