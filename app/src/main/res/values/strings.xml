@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">StarterApp</string>
+    <string name="click_me">Click Me</string>
+    <string name="view_log">View Log</string>
+    <string name="add_log">Add to Log</string>
+    <string name="refresh">Refresh</string>
+
+    <string-array name="mealsArray">
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Dinner</item>
+    </string-array>
+
+    <string-array name="unitsArray">
+        <item>g(s)</item>
+        <item>oz(s)</item>
+        <item>fl oz(s)</item>
+        <item>lb(s)</item>
+        <item>mg(s)</item>
+        <item>kg(s)</item>
+        <item>cup(s)</item>
+        <item>container(s)</item>
+        <item>serving(s)</item>
+    </string-array>
+
+</resources>
