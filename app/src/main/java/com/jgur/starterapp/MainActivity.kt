@@ -2,6 +2,8 @@ package com.jgur.starterapp
 
 import android.Manifest
 import android.app.Activity
+import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -9,6 +11,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -17,11 +20,14 @@ import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 /**
     Creates the main activity which will access daily data and display calories for the day.
     From here you can view the items you have previusly logged or add more items to the log
  */
 class MainActivity : AppCompatActivity() {
+
+    val myCalendar = Calendar.getInstance()
 
     override fun onResume() {
         super.onResume()
@@ -32,13 +38,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        //Loads the items that have been inputted to a local file
-//        val loadItems: Button = findViewById(R.id.refresh_main)
-//        verifyStoragePermissions(this)
-//        loadItems.setOnClickListener(View.OnClickListener {
-//            loadFile()
-//        })
+        verifyStoragePermissions(this)
+        loadFile()
 
         //Gets current date and displays it
         val date = findViewById<TextView>(R.id.dateText);
@@ -56,6 +57,22 @@ class MainActivity : AppCompatActivity() {
         viewLogButton.setOnClickListener(View.OnClickListener {
             viewLogButtonClick();
         })
+
+        val dateTest = findViewById<View>(R.id.dateTest) as EditText
+        val dateListener = OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            myCalendar[Calendar.YEAR] = year
+            myCalendar[Calendar.MONTH] = monthOfYear
+            myCalendar[Calendar.DAY_OF_MONTH] = dayOfMonth
+            updateLabel()
+        }
+
+        dateTest.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                DatePickerDialog(this@MainActivity, dateListener, myCalendar[Calendar.YEAR], myCalendar[Calendar.MONTH],
+                        myCalendar[Calendar.DAY_OF_MONTH]).show()
+            }
+        })
+
     }
 
     /**
@@ -64,6 +81,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun loadFile() {
         val text = readFromFile(applicationContext)
+        val date = findViewById<TextView>(R.id.dateText);
         parseText(text)
     }
 
@@ -183,29 +201,61 @@ class MainActivity : AppCompatActivity() {
 
         val calRegex = Regex("CAL:(\\d+):PRO")
         val calMatches = calRegex.findAll(fileText)
-        val calsInput = calMatches.map { it.groupValues[1] }.joinToString()
-        calsValue.setText("Calories: " + calsInput)
+        var calsInput = calMatches.map { it.groupValues[1] }.joinToString().replace(", ", "+")
+        calsInput = findSum(calsInput).toString()
+        calsValue.setText("Calories (kcal): " + calsInput)
 
         val protRegex = Regex("PRO:(\\d+):CARB")
         val protMatches = protRegex.findAll(fileText)
-        val protInput = protMatches.map { it.groupValues[1] }.joinToString()
-        protValue.setText("Protein: " + protInput)
+        var protInput = protMatches.map { it.groupValues[1] }.joinToString().replace(", ", "+")
+        protInput = findSum(protInput).toString()
+        protValue.setText("Protein (g): " + protInput)
 
         val carbRegex = Regex("CARB:(\\d+):FAT")
         val carbMatches = carbRegex.findAll(fileText)
-        val carbInput = carbMatches.map { it.groupValues[1] }.joinToString()
-        carbValue.setText("Carbs: " + carbInput)
+        var carbInput = carbMatches.map { it.groupValues[1] }.joinToString().replace(", ", "+")
+        carbInput = findSum(carbInput).toString()
+        carbValue.setText("Carbs (g): " + carbInput)
 
         val fatRegex = Regex("FAT:(\\d+):SUG")
         val fatMatches = fatRegex.findAll(fileText)
-        val fatInput = fatMatches.map { it.groupValues[1] }.joinToString()
-        fatValue.setText("Fats: " + fatInput)
+        var fatInput = fatMatches.map { it.groupValues[1] }.joinToString().replace(", ", "+")
+        fatInput = findSum(fatInput).toString()
+        fatValue.setText("Fats (g): " + fatInput)
 
         val sugRegex = Regex("SUG:(\\d+):END:")
         val sugMatches = sugRegex.findAll(fileText)
-        val sugInput = sugMatches.map { it.groupValues[1] }.joinToString()
-        sugarValue.setText("Sugars: " + sugInput)
+        var sugInput = sugMatches.map { it.groupValues[1] }.joinToString().replace(", ", "+")
+        sugInput = findSum(sugInput).toString()
+        sugarValue.setText("Sugars (g): " + sugInput)
 
+    }
+
+    /**
+     * Gets sum of a given string
+     */
+    fun findSum(str: String): Int {
+        var temp = "0"
+        var sum = 0
+
+        // read each character in input string
+        for (i in 0 until str.length) {
+            val ch = str[i]
+
+            if (Character.isDigit(ch)) temp += ch else {
+                sum += temp.toInt()
+                temp = "0"
+            }
+        }
+        return sum + temp.toInt()
+    }
+
+
+    private fun updateLabel() {
+        val dateTest = findViewById<View>(R.id.dateTest) as EditText
+        val myFormat = "MM/dd/yy" //In which you need put here
+        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        dateTest.setText(sdf.format(myCalendar.getTime()))
     }
 
 

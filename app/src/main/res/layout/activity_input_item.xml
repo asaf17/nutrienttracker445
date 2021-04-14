@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <TextView
             android:id="@+id/inputItemsText"
@@ -30,42 +31,54 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="10"
-            android:orientation="vertical">
+            android:layout_weight="15"
+            android:orientation="vertical"
+
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="15"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="10dp">
 
-                <EditText
-                    android:id="@+id/itemName"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/itemLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:inputType="text"
-                    android:layout_weight="10"
-                    android:background="@color/white"
-                    android:clickable="false"
-                    android:ems="10"
-                    android:gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:maxLines="1"
-                    android:lines="1"
-                    android:singleLine="true"
-                    android:hint="Enter Item Name"
-                    android:nextFocusForward="@id/mealSpinner"/>
+                    android:layout_weight="15"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/itemName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:lines="1"
+                        android:clickable="false"
+                        android:nextFocusForward="@id/mealSpinner"
+                        android:ems="10"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:hint="Enter Item Name"
+                        android:textAlignment="textEnd"
+                        android:inputType="textCapWords"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
 
                     <Spinner
                         android:id="@+id/mealSpinner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="15"
+                        android:layout_weight="20"
                         android:gravity="center"
                         android:nextFocusForward="@id/quantityField"
-                        android:textAlignment="textEnd"/>
+                        android:textAlignment="textEnd"
+                        />
 
             </LinearLayout>
 
@@ -73,37 +86,45 @@
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="10"
-                    android:orientation="horizontal">
+                    android:layout_weight="15"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp">
 
-                    <EditText
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/quantityLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="15"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/quantityField"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="10"
-                        android:background="@color/white"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:lines="1"
                         android:clickable="false"
+                        android:nextFocusForward="@id/unitSpinner"
                         android:ems="10"
-                        android:gravity="center"
-                        android:text=""
-                        android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:maxLines="1"
-                        android:lines="1"
-                        android:singleLine="true"
-                        android:inputType="number"
                         android:hint="Enter Quantity"
-                        android:nextFocusForward="@id/unitSpinner" />
+                        android:inputType="number"
+                        android:textAlignment="textEnd"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                     <Spinner
                         android:id="@+id/unitSpinner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="60"
+                        android:layout_weight="20"
                         android:gravity="center"
                         android:nextFocusForward="@id/caloriesInput"
-                        android:textAlignment="textEnd"/>
+                        android:textAlignment="textEnd"
+                        />
 
             </LinearLayout>
 

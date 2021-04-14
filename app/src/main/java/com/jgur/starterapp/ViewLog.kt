@@ -1,25 +1,22 @@
 package com.jgur.starterapp
 
-import android.Manifest
-import android.app.Activity
 import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
-import android.view.View
-import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 /**
  * Creates the ViewLog view which will show any items logged for the selected date.
  */
 class ViewLog : AppCompatActivity() {
+
+
 
     /**
      * Loads the data from the local file each time the view is opened
@@ -34,6 +31,14 @@ class ViewLog : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_log)
         loadFile();
+
+        val bfastValue = findViewById<TextView>(R.id.breakfastValues)
+        val lunchValue = findViewById<TextView>(R.id.lunchValues)
+        val dinnerValue = findViewById<TextView>(R.id.dinnerValues)
+        bfastValue.setMovementMethod(ScrollingMovementMethod())
+        lunchValue.setMovementMethod(ScrollingMovementMethod())
+        dinnerValue.setMovementMethod(ScrollingMovementMethod())
+
     }
 
     private fun loadFile() {
@@ -91,27 +96,20 @@ class ViewLog : AppCompatActivity() {
         val lunchValue = findViewById<TextView>(R.id.lunchValues)
         val dinnerValue = findViewById<TextView>(R.id.dinnerValues)
 
-        val bfastRegex = Regex("ITEM:(.+):MEAL:Breakfast:")
+        val bfastRegex = Regex("ITEMB:(.*?):MEAL:Breakfast:")
         val bfastMatches = bfastRegex.findAll(fileText)
-        val bfastInput = bfastMatches.map { it.groupValues[1] }.joinToString()
+        var bfastInput = bfastMatches.map { it.groupValues[1] }.joinToString().replace(",", "\n")
         bfastValue.setText(bfastInput)
 
-        val lunchRegex = Regex("ITEM:(.+):MEAL:Lunch:")
+        val lunchRegex = Regex("ITEML:(.*?):MEAL:Lunch:")
         val lunchMatches = lunchRegex.findAll(fileText)
-        val lunchInput = lunchMatches.map { it.groupValues[1] }.joinToString()
+        val lunchInput = lunchMatches.map { it.groupValues[1] }.joinToString().replace(",", "\n")
         lunchValue.setText(lunchInput)
 
-        val dinnerRegex = Regex("ITEM:(.+):MEAL:Dinner:")
+        val dinnerRegex = Regex("ITEMD:(.*?):MEAL:Dinner:")
         val dinnerMatches = dinnerRegex.findAll(fileText)
-        val dinnerInput = dinnerMatches.map { it.groupValues[1] }.joinToString()
+        val dinnerInput = dinnerMatches.map { it.groupValues[1] }.joinToString().replace(",", "\n")
         dinnerValue.setText(dinnerInput)
     }
-
-
-    /*
-    This will have the log of all data. It will have a calendar which allows you
-    to select what data you want to see. It will display the items eaten
-    and their caloric values for breakfast, lunch, and dinner.
-     */
 
 }

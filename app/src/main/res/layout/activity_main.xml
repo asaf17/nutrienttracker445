@@ -37,7 +37,40 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="40sp"
-            android:textStyle="bold" />
+            android:textStyle="bold">
+        </TextView>
+
+        <EditText
+            android:id="@+id/dateTest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:maxLines="1"
+            android:lines="1"
+            android:singleLine="true"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="dateTest"
+            android:layout_weight="20"
+            android:ems="10"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            android:textStyle="bold"/>
+
+
+
+<!--        <DatePicker-->
+<!--            android:id="@+id/simpleDatePicker"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:datePickerMode="spinner"-->
+<!--            android:calendarViewShown="false"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            />-->
+
 
         <TextView
             android:id="@+id/caloriesText"
@@ -47,7 +80,7 @@
             android:background="@color/light_gray"
             android:ems="5"
             android:gravity="center"
-            android:text="Calories: "
+            android:text="Calories (kcal): "
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -60,7 +93,7 @@
             android:background="@color/white"
             android:ems="5"
             android:gravity="center"
-            android:text="Protein: "
+            android:text="Protein (g): "
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -73,7 +106,7 @@
             android:background="@color/light_gray"
             android:ems="5"
             android:gravity="center"
-            android:text="Carbs: "
+            android:text="Carbs (g): "
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -86,7 +119,7 @@
             android:background="@color/white"
             android:ems="5"
             android:gravity="center"
-            android:text="Fats: "
+            android:text="Fats (g): "
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -99,7 +132,7 @@
             android:background="@color/light_gray"
             android:ems="5"
             android:gravity="center"
-            android:text="Sugars: "
+            android:text="Sugars (g): "
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />

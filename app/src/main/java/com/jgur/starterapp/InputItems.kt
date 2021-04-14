@@ -1,22 +1,17 @@
 package com.jgur.starterapp
 
-import android.Manifest
-import android.app.Activity
 import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.Environment
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import java.io.*
+import com.google.android.material.textfield.TextInputEditText
+import java.io.IOException
+import java.io.OutputStreamWriter
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class InputItems : AppCompatActivity() {
 
@@ -33,9 +28,10 @@ class InputItems : AppCompatActivity() {
                 R.array.mealsArray,
                 android.R.layout.simple_spinner_item
         ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            adapter.setDropDownViewResource(android.R.layout.simple_list_item_checked)
             mealSpinner.adapter = adapter
         }
+
 
         //Creates a spinner for each of the different unit options
         val unitSpinner: Spinner = findViewById(R.id.unitSpinner)
@@ -44,7 +40,7 @@ class InputItems : AppCompatActivity() {
                 R.array.unitsArray,
                 android.R.layout.simple_spinner_item
         ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            adapter.setDropDownViewResource(android.R.layout.simple_list_item_checked)
             unitSpinner.adapter = adapter
         }
 
@@ -62,8 +58,8 @@ class InputItems : AppCompatActivity() {
     fun saveFile() {
         val sdf = SimpleDateFormat("MM/dd/yyyy")
         val date = (sdf.format(Date()))
-        val itemName: EditText = findViewById(R.id.itemName)
-        val quantity: EditText = findViewById(R.id.quantityField)
+        val itemName: TextInputEditText = findViewById(R.id.itemName);
+        val quantity: TextInputEditText = findViewById(R.id.quantityField)
         val unitSpinner: Spinner = findViewById(R.id.unitSpinner);
         val unit = unitSpinner.selectedItem.toString()
         val caloriesNumber: EditText = findViewById(R.id.caloriesInput)
@@ -74,11 +70,27 @@ class InputItems : AppCompatActivity() {
         val mealSpinner: Spinner = findViewById(R.id.mealSpinner);
         val meal = mealSpinner.selectedItem.toString()
 
-        val text = "DATE:" + date + ":ITEM:" + itemName.text + " - " +
-                quantity.text + " " + unit + ":MEAL:" + meal + ":CAL:" +
-                caloriesNumber.text + ":PRO:" + proteinNumber.text + ":CARB:" +
-                carbsNumber.text + ":FAT:" + fatNumber.text + ":SUG:" + sugarsNumber.text + ":END:"
+        var text = ""
 
+        if(meal == "Breakfast"){
+            text = "DATE:" + date + ":ITEMB:" + itemName.text.toString() + " - " +
+                    quantity.text.toString()  + " " + unit + ":MEAL:" + meal + ":CAL:" +
+                    caloriesNumber.text + ":PRO:" + proteinNumber.text + ":CARB:" +
+                    carbsNumber.text + ":FAT:" + fatNumber.text + ":SUG:" + sugarsNumber.text + ":END:"
+        }
+        else if(meal == "Lunch"){
+            text = "DATE:" + date + ":ITEML:" + itemName.text.toString() + " - " +
+                    quantity.text.toString()  + " " + unit + ":MEAL:" + meal + ":CAL:" +
+                    caloriesNumber.text + ":PRO:" + proteinNumber.text + ":CARB:" +
+                    carbsNumber.text + ":FAT:" + fatNumber.text + ":SUG:" + sugarsNumber.text + ":END:"
+        } else{
+            text = "DATE:" + date + ":ITEMD:" + itemName.text.toString() + " - " +
+                    quantity.text.toString()  + " " + unit + ":MEAL:" + meal + ":CAL:" +
+                    caloriesNumber.text + ":PRO:" + proteinNumber.text + ":CARB:" +
+                    carbsNumber.text + ":FAT:" + fatNumber.text + ":SUG:" + sugarsNumber.text + ":END:"
+        }
+
+        savedToastMsg("Added Item to Log");
         writeToFile(text, applicationContext)
     }
 
@@ -94,7 +106,8 @@ class InputItems : AppCompatActivity() {
             val outputStreamWriter = OutputStreamWriter(
                     context.openFileOutput(
                             "config.txt",
-                            Context.MODE_PRIVATE
+                            Context.MODE_APPEND
+                            //Context.MODE_PRIVATE
                     )
             )
             outputStreamWriter.write(data)
@@ -103,6 +116,11 @@ class InputItems : AppCompatActivity() {
         } catch (e: IOException) {
             Log.e("Exception", "File write failed: $e")
         }
+    }
+
+    private fun savedToastMsg(msg: String?) {
+        val savedtoast = Toast.makeText(this, msg, Toast.LENGTH_LONG)
+        savedtoast.show()
     }
 
 }

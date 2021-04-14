@@ -44,19 +44,35 @@
                 android:paddingLeft="20dp"
                 android:text="Breakfast: "
                 android:textColor="@color/black"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/breakfastValues"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="10"
-                android:background="@color/white"
-                android:ems="5"
-                android:gravity="center"
-                android:text="..."
-                android:textColor="@color/black"
-                android:textSize="25sp" />
+
+
+<!--                <ScrollView-->
+<!--                    android:id="@+id/breakfastScroll"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="10"-->
+<!--                    android:scrollbars="vertical">-->
+<!--                </ScrollView>-->
+
+                    <TextView
+                        android:id="@+id/breakfastValues"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10"
+                        android:background="@color/white"
+                        android:ems="5"
+                        android:gravity="center"
+                        android:text="..."
+                        android:textColor="@color/black"
+                        android:textSize="25sp"
+                        android:scrollbars="vertical">
+                    </TextView>
+
+
+
         </LinearLayout>
 
 
@@ -77,7 +93,8 @@
                 android:paddingLeft="20dp"
                 android:text="Lunch: "
                 android:textColor="@color/black"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/lunchValues"
@@ -89,7 +106,9 @@
                 android:gravity="center"
                 android:text="..."
                 android:textColor="@color/black"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                android:scrollbars="vertical"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -109,7 +128,9 @@
                 android:paddingLeft="20dp"
                 android:text="Dinner: "
                 android:textColor="@color/black"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                android:textStyle="bold"/>
+            />
 
             <TextView
                 android:id="@+id/dinnerValues"
