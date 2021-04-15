@@ -41,11 +41,6 @@ class MainActivity : AppCompatActivity() {
         verifyStoragePermissions(this)
         loadFile()
 
-        //Gets current date and displays it
-        val date = findViewById<TextView>(R.id.dateText);
-        val sdf = SimpleDateFormat("MM/dd/yyyy")
-        date.setText(sdf.format(Date()))
-
         //Goes to the input item view when the button is clicked
         val addItemButton: Button = findViewById(R.id.addItem)
         addItemButton.setOnClickListener(View.OnClickListener {
@@ -58,18 +53,22 @@ class MainActivity : AppCompatActivity() {
             viewLogButtonClick();
         })
 
-        val dateTest = findViewById<View>(R.id.dateTest) as EditText
+        val dateTest = findViewById<View>(R.id.dateText) as EditText
+        val sdf = SimpleDateFormat("MM/dd/yyyy")
+        dateTest.setText(sdf.format(Date()))
+
         val dateListener = OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
             myCalendar[Calendar.YEAR] = year
             myCalendar[Calendar.MONTH] = monthOfYear
             myCalendar[Calendar.DAY_OF_MONTH] = dayOfMonth
             updateLabel()
+            loadFile()
         }
 
         dateTest.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 DatePickerDialog(this@MainActivity, dateListener, myCalendar[Calendar.YEAR], myCalendar[Calendar.MONTH],
-                        myCalendar[Calendar.DAY_OF_MONTH]).show()
+                        myCalendar[Calendar.DAY_OF_MONTH]).show();
             }
         })
 
@@ -161,6 +160,8 @@ class MainActivity : AppCompatActivity() {
     private fun inputItemsButtonClick(){
         val intent = Intent(this, InputItems::class.java).apply {
         }
+        val date = findViewById<TextView>(R.id.dateText);
+        intent.putExtra("date", date.text.toString())
         startActivity(intent)
     }
 
@@ -170,6 +171,8 @@ class MainActivity : AppCompatActivity() {
     private fun viewLogButtonClick(){
         val intent = Intent(this, ViewLog::class.java).apply {
         }
+        val date = findViewById<TextView>(R.id.dateText);
+        intent.putExtra("date", date.text.toString())
         startActivity(intent)
     }
 
@@ -179,9 +182,15 @@ class MainActivity : AppCompatActivity() {
      * @param fileText - String data from local file
      */
     private fun parseText(fileText: String) {
-        val sdf = SimpleDateFormat("MM/dd/yyyy")
-        val date =  sdf.format(Date())
-        val regex = Regex("DATE:"+date+":(.*):END:")
+//        val sdf = SimpleDateFormat("MM/dd/yyyy")
+//        val date =  sdf.format(Date())
+
+//        val myFormat = "MM/dd/yyyy"
+//        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        val date = findViewById<TextView>(R.id.dateText);
+        val dateString = date.text.toString()
+
+        val regex = Regex("DATE:"+dateString+":(.*?):END:")
         val matches = regex.findAll(fileText)
         val itemsInputted = matches.map { it.groupValues[0] }.joinToString()
         setValues(itemsInputted)
@@ -252,10 +261,10 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun updateLabel() {
-        val dateTest = findViewById<View>(R.id.dateTest) as EditText
-        val myFormat = "MM/dd/yy" //In which you need put here
+        val dateText = findViewById<View>(R.id.dateText) as EditText
+        val myFormat = "MM/dd/yyyy" //In which you need put here
         val sdf = SimpleDateFormat(myFormat, Locale.US)
-        dateTest.setText(sdf.format(myCalendar.getTime()))
+        dateText.setText(sdf.format(myCalendar.getTime()))
     }
 
 

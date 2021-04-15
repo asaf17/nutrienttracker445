@@ -39,6 +39,7 @@ class ViewLog : AppCompatActivity() {
         lunchValue.setMovementMethod(ScrollingMovementMethod())
         dinnerValue.setMovementMethod(ScrollingMovementMethod())
 
+
     }
 
     private fun loadFile() {
@@ -78,9 +79,9 @@ class ViewLog : AppCompatActivity() {
      */
     private fun parseText(fileText: String) {
 
-        val sdf = SimpleDateFormat("MM/dd/yyyy")
-        val date =  sdf.format(Date())
-        val regex = Regex("DATE:"+date+":(.*):END:")
+
+        val dateValue = intent.getStringExtra("date")
+        val regex = Regex("DATE:"+dateValue+":(.*?):END:")
         val matches = regex.findAll(fileText)
         val itemsInputted = matches.map { it.groupValues[0] }.joinToString()
         setValues(itemsInputted)

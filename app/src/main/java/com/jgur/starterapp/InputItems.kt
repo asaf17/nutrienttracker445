@@ -9,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
 import java.io.IOException
 import java.io.OutputStreamWriter
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class InputItems : AppCompatActivity() {
@@ -49,6 +47,7 @@ class InputItems : AppCompatActivity() {
             saveFile();
         })
 
+
     }
 
     /**
@@ -56,8 +55,7 @@ class InputItems : AppCompatActivity() {
      * it to the local device storage.
      */
     fun saveFile() {
-        val sdf = SimpleDateFormat("MM/dd/yyyy")
-        val date = (sdf.format(Date()))
+        val dateValue = intent.getStringExtra("date")
         val itemName: TextInputEditText = findViewById(R.id.itemName);
         val quantity: TextInputEditText = findViewById(R.id.quantityField)
         val unitSpinner: Spinner = findViewById(R.id.unitSpinner);
@@ -73,18 +71,18 @@ class InputItems : AppCompatActivity() {
         var text = ""
 
         if(meal == "Breakfast"){
-            text = "DATE:" + date + ":ITEMB:" + itemName.text.toString() + " - " +
+            text = "DATE:" + dateValue + ":ITEMB:" + itemName.text.toString() + " - " +
                     quantity.text.toString()  + " " + unit + ":MEAL:" + meal + ":CAL:" +
                     caloriesNumber.text + ":PRO:" + proteinNumber.text + ":CARB:" +
                     carbsNumber.text + ":FAT:" + fatNumber.text + ":SUG:" + sugarsNumber.text + ":END:"
         }
         else if(meal == "Lunch"){
-            text = "DATE:" + date + ":ITEML:" + itemName.text.toString() + " - " +
+            text = "DATE:" + dateValue + ":ITEML:" + itemName.text.toString() + " - " +
                     quantity.text.toString()  + " " + unit + ":MEAL:" + meal + ":CAL:" +
                     caloriesNumber.text + ":PRO:" + proteinNumber.text + ":CARB:" +
                     carbsNumber.text + ":FAT:" + fatNumber.text + ":SUG:" + sugarsNumber.text + ":END:"
         } else{
-            text = "DATE:" + date + ":ITEMD:" + itemName.text.toString() + " - " +
+            text = "DATE:" + dateValue + ":ITEMD:" + itemName.text.toString() + " - " +
                     quantity.text.toString()  + " " + unit + ":MEAL:" + meal + ":CAL:" +
                     caloriesNumber.text + ":PRO:" + proteinNumber.text + ":CARB:" +
                     carbsNumber.text + ":FAT:" + fatNumber.text + ":SUG:" + sugarsNumber.text + ":END:"
