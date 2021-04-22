@@ -5,21 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".InputItems">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+    tools:context=".InputItems"
+    android:background="@color/light_gray">
 
         <TextView
             android:id="@+id/itemLogText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
+            android:layout_weight="2"
+            android:layout_marginTop="5dp"
             android:clickable="false"
-            android:ems="10"
             android:gravity="center"
             android:text="Item Log"
             android:textColor="@color/black"
@@ -36,10 +31,9 @@
             <TextView
                 android:id="@+id/breakfastText"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="20"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:background="@color/white"
-                android:ems="5"
                 android:gravity="center"
                 android:paddingLeft="20dp"
                 android:text="Breakfast: "
@@ -48,102 +42,153 @@
                 android:textStyle="bold" />
 
 
-
-<!--                <ScrollView-->
-<!--                    android:id="@+id/breakfastScroll"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="10"-->
-<!--                    android:scrollbars="vertical">-->
-<!--                </ScrollView>-->
+                <ScrollView
+                    android:id="@+id/breakfastScroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="10"
+                    android:scrollbars="vertical"
+                    android:background="@color/white">
 
                     <TextView
                         android:id="@+id/breakfastValues"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="10"
                         android:background="@color/white"
-                        android:ems="5"
                         android:gravity="center"
                         android:text="..."
                         android:textColor="@color/black"
-                        android:textSize="25sp"
+                        android:textSize="20sp"
                         android:scrollbars="vertical">
                     </TextView>
 
+
+                </ScrollView>
 
 
         </LinearLayout>
 
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/lunchText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="10"
-            android:orientation="vertical">
+            android:layout_weight="1"
+            android:background="@color/light_gray"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:text="Lunch: "
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/lunchText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="20"
-                android:background="@color/light_gray"
-                android:ems="5"
-                android:gravity="center"
-                android:paddingLeft="20dp"
-                android:text="Lunch: "
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:textStyle="bold"/>
+        <ScrollView
+            android:id="@+id/lunchScroll"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="10"
+            android:background="@color/light_gray"
+            android:scrollbars="vertical">
 
             <TextView
                 android:id="@+id/lunchValues"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="10"
                 android:background="@color/light_gray"
-                android:ems="5"
                 android:gravity="center"
                 android:text="..."
                 android:textColor="@color/black"
                 android:textSize="25sp"
-                android:scrollbars="vertical"
-                />
-        </LinearLayout>
+                android:scrollbars="vertical">
+            </TextView>
 
-        <LinearLayout
+        </ScrollView>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dinnerText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="10"
-            android:orientation="vertical">
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:text="Dinner: "
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/dinnerText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="20"
-                android:background="@color/white"
-                android:ems="5"
-                android:gravity="center"
-                android:paddingLeft="20dp"
-                android:text="Dinner: "
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:textStyle="bold"/>
-            />
+        <ScrollView
+            android:id="@+id/dinnerScroll"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="10"
+            android:background="@color/white"
+            android:scrollbars="vertical">
 
             <TextView
                 android:id="@+id/dinnerValues"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="10"
                 android:background="@color/white"
-                android:ems="5"
                 android:gravity="center"
                 android:text="..."
                 android:textColor="@color/black"
-                android:textSize="25sp" />
-        </LinearLayout>
+                android:textSize="25sp"
+                android:scrollbars="vertical">
+            </TextView>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/homeButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:background="@color/black"
+            android:gravity="center"
+            android:text="Home"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/addItemToLog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:background="@color/black"
+            android:gravity="center"
+            android:text="@string/add_log"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+
+
+    </LinearLayout>
 
 
 <!--        <Button-->
@@ -158,6 +203,5 @@
 <!--            android:textSize="25sp"-->
 <!--            android:textStyle="bold" />-->
 
-        </LinearLayout>
 
     </LinearLayout>

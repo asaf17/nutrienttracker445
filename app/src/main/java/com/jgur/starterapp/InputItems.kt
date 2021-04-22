@@ -1,6 +1,7 @@
 package com.jgur.starterapp
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -18,6 +19,8 @@ class InputItems : AppCompatActivity() {
         setContentView(R.layout.activity_input_item)
 
         val addItemToLog: Button = findViewById(R.id.addItemToLog)
+        val homeButton: Button = findViewById(R.id.homeButton)
+        val viewLog: Button = findViewById(R.id.viewLog)
 
         //Creates a spinner for each of the different meal options
         val mealSpinner: Spinner = findViewById(R.id.mealSpinner)
@@ -47,6 +50,14 @@ class InputItems : AppCompatActivity() {
             saveFile();
         })
 
+        homeButton.setOnClickListener(View.OnClickListener {
+            goHome()
+        })
+
+        viewLog.setOnClickListener(View.OnClickListener {
+            goViewLog()
+        })
+
 
     }
 
@@ -60,36 +71,46 @@ class InputItems : AppCompatActivity() {
         val quantity: TextInputEditText = findViewById(R.id.quantityField)
         val unitSpinner: Spinner = findViewById(R.id.unitSpinner);
         val unit = unitSpinner.selectedItem.toString()
-        val caloriesNumber: EditText = findViewById(R.id.caloriesInput)
-        val proteinNumber: EditText = findViewById(R.id.proteinInput)
-        val carbsNumber: EditText = findViewById(R.id.carbsInput)
-        val fatNumber: EditText = findViewById(R.id.fatInput)
-        val sugarsNumber: EditText = findViewById(R.id.sugarInput)
+        val caloriesNumber: TextInputEditText = findViewById(R.id.caloriesInput)
+        val proteinNumber: TextInputEditText = findViewById(R.id.proteinInput)
+        val carbsNumber: TextInputEditText = findViewById(R.id.carbsInput)
+        val fatNumber: TextInputEditText = findViewById(R.id.fatInput)
+        val sugarsNumber: TextInputEditText = findViewById(R.id.sugarInput)
         val mealSpinner: Spinner = findViewById(R.id.mealSpinner);
         val meal = mealSpinner.selectedItem.toString()
 
         var text = ""
 
-        if(meal == "Breakfast"){
-            text = "DATE:" + dateValue + ":ITEMB:" + itemName.text.toString() + " - " +
-                    quantity.text.toString()  + " " + unit + ":MEAL:" + meal + ":CAL:" +
-                    caloriesNumber.text + ":PRO:" + proteinNumber.text + ":CARB:" +
-                    carbsNumber.text + ":FAT:" + fatNumber.text + ":SUG:" + sugarsNumber.text + ":END:"
+        if(itemName.text.toString() == "" ||  quantity.text.toString() == "" ||  caloriesNumber.text.toString() == ""||
+                proteinNumber.text.toString() == "" ||  carbsNumber.text.toString() == "" || fatNumber.text.toString() == "" ||
+                sugarsNumber.text.toString() == ""){
+            noValueToastMsg("Fill out all fields.");
+
         }
-        else if(meal == "Lunch"){
-            text = "DATE:" + dateValue + ":ITEML:" + itemName.text.toString() + " - " +
-                    quantity.text.toString()  + " " + unit + ":MEAL:" + meal + ":CAL:" +
-                    caloriesNumber.text + ":PRO:" + proteinNumber.text + ":CARB:" +
-                    carbsNumber.text + ":FAT:" + fatNumber.text + ":SUG:" + sugarsNumber.text + ":END:"
-        } else{
-            text = "DATE:" + dateValue + ":ITEMD:" + itemName.text.toString() + " - " +
-                    quantity.text.toString()  + " " + unit + ":MEAL:" + meal + ":CAL:" +
-                    caloriesNumber.text + ":PRO:" + proteinNumber.text + ":CARB:" +
-                    carbsNumber.text + ":FAT:" + fatNumber.text + ":SUG:" + sugarsNumber.text + ":END:"
+        else{
+            if(meal == "Breakfast"){
+                text = "DATE:" + dateValue + ":ITEMB:" + itemName.text.toString() + " - " +
+                        quantity.text.toString()  + " " + unit + ":MEAL:" + meal + ":CAL:" +
+                        caloriesNumber.text.toString() + ":PRO:" + proteinNumber.text.toString()+ ":CARB:" +
+                        carbsNumber.text.toString() + ":FAT:" + fatNumber.text.toString() + ":SUG:" + sugarsNumber.text.toString() + ":END:"
+            }
+            else if(meal == "Lunch"){
+                text = "DATE:" + dateValue + ":ITEML:" + itemName.text.toString() + " - " +
+                        quantity.text.toString()  + " " + unit + ":MEAL:" + meal + ":CAL:" +
+                        caloriesNumber.text.toString() + ":PRO:" + proteinNumber.text.toString()+ ":CARB:" +
+                        carbsNumber.text.toString() + ":FAT:" + fatNumber.text.toString() + ":SUG:" + sugarsNumber.text.toString() + ":END:"
+            } else{
+                text = "DATE:" + dateValue + ":ITEMD:" + itemName.text.toString() + " - " +
+                        quantity.text.toString()  + " " + unit + ":MEAL:" + meal + ":CAL:" +
+                        caloriesNumber.text.toString() + ":PRO:" + proteinNumber.text.toString()+ ":CARB:" +
+                        carbsNumber.text.toString() + ":FAT:" + fatNumber.text.toString() + ":SUG:" + sugarsNumber.text.toString() + ":END:"
+            }
+
+            savedToastMsg("Added Item to Log");
+            writeToFile(text, applicationContext)
         }
 
-        savedToastMsg("Added Item to Log");
-        writeToFile(text, applicationContext)
+
     }
 
     /**
@@ -121,21 +142,29 @@ class InputItems : AppCompatActivity() {
         savedtoast.show()
     }
 
+    private fun noValueToastMsg(msg: String?) {
+        val novaluetoast = Toast.makeText(this, msg, Toast.LENGTH_LONG)
+        novaluetoast.show()
+    }
+
+    private fun goHome(){
+        val intent = Intent(this, MainActivity::class.java).apply {
+        }
+
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivityIfNeeded(intent, 0);
+    }
+
+    private fun goViewLog(){
+        val dateValue = intent.getStringExtra("date")
+        val intent = Intent(this, ViewLog::class.java).apply {
+        }
+        intent.putExtra("date", dateValue)
+        startActivity(intent)
+    }
+
+
 }
-
-
-
-//        val itemName: EditText = findViewById(R.id.itemName)
-//        itemName.addTextChangedListener(object : TextWatcher {
-//            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-//
-//            }
-//            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-//            }
-//            override fun afterTextChanged(s: Editable) {
-//
-//            }
-//        })
 
 
 

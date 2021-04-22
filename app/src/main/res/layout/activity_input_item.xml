@@ -7,20 +7,14 @@
     android:orientation="vertical"
     tools:context=".InputItems">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        >
 
         <TextView
             android:id="@+id/inputItemsText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_weight="10"
+            android:layout_weight="5"
             android:clickable="false"
+            android:layout_marginTop="5dp"
             android:ems="10"
             android:gravity="center"
             android:text="Input Nutrients"
@@ -150,23 +144,31 @@
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/caloriesInput"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/calLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="10"
-                android:background="@color/white"
-                android:ems="5"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:maxLines="1"
-                android:lines="1"
-                android:singleLine="true"
-                android:inputType="number"
-                android:hint="0"
-                android:nextFocusForward="@id/proteinInput"/>
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/caloriesInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:clickable="false"
+                    android:nextFocusForward="@id/proteinInput"
+                    android:ems="10"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:hint="Quantity"
+                    android:textAlignment="center"
+                    android:inputType="number"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
@@ -174,7 +176,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="10"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/light_gray">
 
             <TextView
                 android:id="@+id/proteinInputText"
@@ -189,23 +192,31 @@
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/proteinInput"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/proteinLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="10"
-                android:background="@color/light_gray"
-                android:ems="5"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:maxLines="1"
-                android:lines="1"
-                android:singleLine="true"
-                android:inputType="number"
-                android:hint="0"
-                android:nextFocusForward="@id/carbsInput"/>
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/proteinInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:clickable="false"
+                    android:nextFocusForward="@id/carbsInput"
+                    android:ems="10"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:hint="Quantity"
+                    android:textAlignment="center"
+                    android:inputType="number"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
@@ -229,23 +240,31 @@
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/carbsInput"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/carbsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="10"
-                android:background="@color/white"
-                android:ems="5"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:maxLines="1"
-                android:lines="1"
-                android:singleLine="true"
-                android:inputType="number"
-                android:hint="0"
-                android:nextFocusForward="@id/fatInput"/>
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/carbsInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:clickable="false"
+                    android:nextFocusForward="@id/fatInput"
+                    android:ems="10"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:hint="Quantity"
+                    android:textAlignment="center"
+                    android:inputType="number"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
@@ -254,7 +273,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="10"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/light_gray">
 
             <TextView
                 android:id="@+id/fatInputText"
@@ -269,23 +289,32 @@
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/fatInput"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fatLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="10"
-                android:background="@color/light_gray"
-                android:ems="5"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:maxLines="1"
-                android:lines="1"
-                android:singleLine="true"
-                android:inputType="number"
-                android:hint="0"
-                android:nextFocusForward="@id/sugarInput"/>
+                android:textAlignment="center"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fatInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:clickable="false"
+                    android:nextFocusForward="@id/sugarInput"
+                    android:ems="10"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:hint="Quantity"
+                    android:textAlignment="center"
+                    android:inputType="number"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
@@ -308,42 +337,81 @@
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/sugarInput"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/sugarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="10"
-                android:background="@color/white"
-                android:ems="5"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:maxLines="1"
-                android:lines="1"
-                android:singleLine="true"
-                android:inputType="number"
-                android:hint="0"
-                android:nextFocusForward="@id/addItemToLog"/>
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/sugarInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:clickable="false"
+                    android:nextFocusForward="@id/addItemToLog"
+                    android:ems="10"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:hint="Quantity"
+                    android:textAlignment="center"
+                    android:inputType="number"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
-            <Button
-                android:id="@+id/addItemToLog"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:background="@color/black"
-                android:gravity="center"
-                android:text="@string/add_log"
-                android:textColor="@color/white"
-                android:textSize="25sp"
-                android:textStyle="bold" />
+    <Button
+        android:id="@+id/addItemToLog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:background="@color/black"
+        android:gravity="center"
+        android:text="Add Item to Log"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/homeButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:background="@color/black"
+            android:gravity="center"
+            android:text="Home"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/viewLog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:background="@color/black"
+            android:gravity="center"
+            android:text="View Log"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
 
 
 
 
-        </LinearLayout>
+    </LinearLayout>
+
 
     </LinearLayout>

@@ -1,9 +1,12 @@
 package com.jgur.starterapp
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import java.io.*
@@ -39,6 +42,16 @@ class ViewLog : AppCompatActivity() {
         lunchValue.setMovementMethod(ScrollingMovementMethod())
         dinnerValue.setMovementMethod(ScrollingMovementMethod())
 
+        val addItemToLog: Button = findViewById(R.id.addItemToLog)
+        val homeButton: Button = findViewById(R.id.homeButton)
+
+        addItemToLog.setOnClickListener(View.OnClickListener {
+            goAddItem()
+        })
+
+        homeButton.setOnClickListener(View.OnClickListener {
+            goHome();
+        })
 
     }
 
@@ -111,6 +124,19 @@ class ViewLog : AppCompatActivity() {
         val dinnerMatches = dinnerRegex.findAll(fileText)
         val dinnerInput = dinnerMatches.map { it.groupValues[1] }.joinToString().replace(",", "\n")
         dinnerValue.setText(dinnerInput)
+    }
+
+    private fun goHome(){
+        val intent = Intent(this, MainActivity::class.java).apply {
+        }
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivityIfNeeded(intent, 0);
+    }
+
+    private fun goAddItem(){
+        val intent = Intent(this, InputItems::class.java).apply {
+        }
+        startActivity(intent)
     }
 
 }
