@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">StarterApp</string>
+    <string name="app_name">Nutrition Tracker</string>
     <string name="click_me">Click Me</string>
     <string name="view_log">View Log</string>
     <string name="add_log">Add to Log</string>
