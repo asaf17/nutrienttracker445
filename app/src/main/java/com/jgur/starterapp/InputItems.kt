@@ -18,9 +18,9 @@ class InputItems : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_input_item)
 
-        val addItemToLog: Button = findViewById(R.id.addItemToLog)
+        val addItemToLog: Button = findViewById(R.id.addItemToLogButton)
         val homeButton: Button = findViewById(R.id.homeButton)
-        val viewLog: Button = findViewById(R.id.viewLog)
+        val viewLog: Button = findViewById(R.id.viewLogButton)
 
         //Creates a spinner for each of the different meal options
         val mealSpinner: Spinner = findViewById(R.id.mealSpinner)
@@ -32,7 +32,6 @@ class InputItems : AppCompatActivity() {
             adapter.setDropDownViewResource(android.R.layout.simple_list_item_checked)
             mealSpinner.adapter = adapter
         }
-
 
         //Creates a spinner for each of the different unit options
         val unitSpinner: Spinner = findViewById(R.id.unitSpinner)
@@ -50,10 +49,12 @@ class InputItems : AppCompatActivity() {
             saveFile();
         })
 
+        //When the home button is clicked it will go home.
         homeButton.setOnClickListener(View.OnClickListener {
             goHome()
         })
 
+        //When the viewLog button is clicked it will go to the log.
         viewLog.setOnClickListener(View.OnClickListener {
             goViewLog()
         })
@@ -68,7 +69,7 @@ class InputItems : AppCompatActivity() {
     fun saveFile() {
         val dateValue = intent.getStringExtra("date")
         val itemName: TextInputEditText = findViewById(R.id.itemName);
-        val quantity: TextInputEditText = findViewById(R.id.quantityField)
+        val quantity: TextInputEditText = findViewById(R.id.itemQuantity)
         val unitSpinner: Spinner = findViewById(R.id.unitSpinner);
         val unit = unitSpinner.selectedItem.toString()
         val caloriesNumber: TextInputEditText = findViewById(R.id.caloriesInput)
@@ -81,12 +82,15 @@ class InputItems : AppCompatActivity() {
 
         var text = ""
 
+        //Checks to ensure all values are filled out, if not will give a toast message.
         if(itemName.text.toString() == "" ||  quantity.text.toString() == "" ||  caloriesNumber.text.toString() == ""||
                 proteinNumber.text.toString() == "" ||  carbsNumber.text.toString() == "" || fatNumber.text.toString() == "" ||
                 sugarsNumber.text.toString() == ""){
             noValueToastMsg("Fill out all fields.");
 
         }
+        //If all values are saved it will save in a string that is easy to be
+        //read in an regular expression to get values.
         else{
             if(meal == "Breakfast"){
                 text = "DATE:" + dateValue + ":ITEMB:" + itemName.text.toString() + " - " +
@@ -106,7 +110,18 @@ class InputItems : AppCompatActivity() {
                         carbsNumber.text.toString() + ":FAT:" + fatNumber.text.toString() + ":SUG:" + sugarsNumber.text.toString() + ":END:"
             }
 
+            //Resets the values for a new input.
+            itemName.setText("")
+            quantity.setText("")
+            caloriesNumber.setText("")
+            proteinNumber.setText("")
+            carbsNumber.setText("")
+            fatNumber.setText("")
+            sugarsNumber.setText("")
             savedToastMsg("Added Item to Log");
+
+
+            //Saves the data to local user storage.
             writeToFile(text, applicationContext)
         }
 
@@ -137,6 +152,9 @@ class InputItems : AppCompatActivity() {
         }
     }
 
+    /**
+     * Toast messages
+     */
     private fun savedToastMsg(msg: String?) {
         val savedtoast = Toast.makeText(this, msg, Toast.LENGTH_LONG)
         savedtoast.show()
@@ -147,14 +165,21 @@ class InputItems : AppCompatActivity() {
         novaluetoast.show()
     }
 
+    /**
+     * Method that will take the user to the home page.
+     * If home page is already active it will bring it
+     * back.
+     */
     private fun goHome(){
         val intent = Intent(this, MainActivity::class.java).apply {
         }
-
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivityIfNeeded(intent, 0);
     }
 
+    /**
+     * Takes user to the view log and passes in the date.
+     */
     private fun goViewLog(){
         val dateValue = intent.getStringExtra("date")
         val intent = Intent(this, ViewLog::class.java).apply {

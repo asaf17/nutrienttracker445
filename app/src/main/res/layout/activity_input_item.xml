@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:windowSoftInputMode="adjustPan|adjustResize"
     tools:context=".InputItems">
 
 
         <TextView
-            android:id="@+id/inputItemsText"
+            android:id="@+id/inputNutrientsText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -38,7 +39,7 @@
                 android:paddingLeft="10dp">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/itemLayout"
+                    android:id="@+id/itemNameLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="15"
@@ -70,7 +71,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="20"
                         android:gravity="center"
-                        android:nextFocusForward="@id/quantityField"
+                        android:nextFocusForward="@id/itemQuantity"
                         android:textAlignment="textEnd"
                         />
 
@@ -92,7 +93,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/quantityField"
+                        android:id="@+id/itemQuantity"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:maxLines="1"
@@ -366,7 +367,7 @@
         </LinearLayout>
 
     <Button
-        android:id="@+id/addItemToLog"
+        android:id="@+id/addItemToLogButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="5"
@@ -396,7 +397,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/viewLog"
+            android:id="@+id/viewLogButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="10"

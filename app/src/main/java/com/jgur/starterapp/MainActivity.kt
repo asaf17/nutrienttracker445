@@ -29,6 +29,9 @@ class MainActivity : AppCompatActivity() {
 
     val myCalendar = Calendar.getInstance()
 
+    /**
+     * Updates data when user repopens the home page.
+     */
     override fun onResume() {
         super.onResume()
         loadFile()
@@ -38,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Ensures user has storage permissions on phone.
         verifyStoragePermissions(this)
         loadFile()
 
@@ -53,6 +57,8 @@ class MainActivity : AppCompatActivity() {
             viewLogButtonClick();
         })
 
+        //Clickable editText that allows the user to bring up
+        //a clickable calendar to change the date
         val dateTest = findViewById<View>(R.id.dateText) as EditText
         val sdf = SimpleDateFormat("MM/dd/yyyy")
         dateTest.setText(sdf.format(Date()))
@@ -122,9 +128,7 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Checks if the app has permission to write to device storage
-     *
      * If the app does not has permission then the user will be prompted to grant permissions
-     *
      * @param activity
      */
     fun verifyStoragePermissions(activity: Activity?) {
@@ -182,14 +186,10 @@ class MainActivity : AppCompatActivity() {
      * @param fileText - String data from local file
      */
     private fun parseText(fileText: String) {
-//        val sdf = SimpleDateFormat("MM/dd/yyyy")
-//        val date =  sdf.format(Date())
-
-//        val myFormat = "MM/dd/yyyy"
-//        val sdf = SimpleDateFormat(myFormat, Locale.US)
         val date = findViewById<TextView>(R.id.dateText);
         val dateString = date.text.toString()
 
+        //Uses regex to get only values on the selected date
         val regex = Regex("DATE:"+dateString+":(.*?):END:")
         val matches = regex.findAll(fileText)
         val itemsInputted = matches.map { it.groupValues[0] }.joinToString()
@@ -197,7 +197,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Sets the various values accorind t
+     * Sets the various values according to what is read from
+     * the local file using regular expessions.
      * @param fileText Parsed data from the local file with only
      * the selected date we are looking at
      */
@@ -241,7 +242,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Gets sum of a given string
+     * Gets sum of a given integer string
      */
     fun findSum(str: String): Int {
         var temp = "0"
@@ -260,6 +261,9 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    /**
+     * Updates the date editText when the user changes it.
+     */
     private fun updateLabel() {
         val dateText = findViewById<View>(R.id.dateText) as EditText
         val myFormat = "MM/dd/yyyy" //In which you need put here
